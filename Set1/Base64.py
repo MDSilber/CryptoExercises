@@ -1,5 +1,10 @@
 import binascii
 
+def base_64_to_hex(base_64_string):
+	binary_string = binascii.a2b_base64(base_64_string)
+	hex_string = hexlify(binary_string)
+	return hex_string
+
 def hex_to_base_64(hex_string):
 	binary_string = binascii.unhexlify(hex_string)
 	base_64_string = binascii.b2a_base64(binary_string)
