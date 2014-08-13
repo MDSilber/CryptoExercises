@@ -6,7 +6,7 @@ def decode(encoded_string):
  	for possible_key in xrange(0, 256):
  		message = ''
  		for index in xrange(0, len(encoded_string), 2):
- 			decoded_value = XOR.XOR(int(encoded_string[index:index+2], 16), possible_key) 
+ 			decoded_value = str(XOR.XOR(int(encoded_string[index:index+2], 16), possible_key))
  			message += chr(int(decoded_value, 16))
 		possible_decryptions.append(message)
 
