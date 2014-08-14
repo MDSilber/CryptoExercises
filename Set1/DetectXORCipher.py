@@ -5,7 +5,7 @@ def find_cipher_in_list(cipher_list):
 	best_match_score = 0
 	index = 0
 	for possible_cipher in cipher_list:
-		possible_best_match = XORCipher.decode(possible_cipher)[0]
+		possible_best_match = XORCipher.decode_single_character(possible_cipher)[0]
 		if possible_best_match[1] > best_match_score:
 			best_match_score = possible_best_match[1]
 			best_match_string = str(possible_best_match[0])
