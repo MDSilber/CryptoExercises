@@ -25,7 +25,7 @@ def find_key_length(encrypted_string):
 
 		key_lengths[i] = float((hamming_distance(substring_1, substring_2)))/float(i)
 
-	return sorted(key_lengths.items(), key=lambda x: x[1])
+	return sorted(key_lengths.items(), key=lambda x: x[1])[0][0]
 
 def chunk_string_into_blocks(string_to_be_chunked, length):
 	return [string_to_be_chunked[x:x+length] for x in xrange(0, len(string_to_be_chunked), length)]
@@ -36,9 +36,9 @@ def encoded_transposed_chunks(chunks, length):
 
 	for i in xrange(0, length):
 		for chunk in chunks:
-			current_string = str(transposed_chunks[i])
-			current_string += str(chunk[i])
-			transposed_chunks[i] = current_string
+			# current_string = str(transposed_chunks[i])
+			# current_string += str(chunk[i])
+			transposed_chunks[i % length] += bytes(chunk)
 
 	return transposed_chunks
 
@@ -65,13 +65,14 @@ def test_chunking(message):
 # running the code
 
 encoded_string = open('./6.txt', 'r').read()
+encoded_binary_string = Base64.base_64_to_bytes(encoded_string)
 # print encoded_string
-key_length = find_key_length(encoded_string)
+key_length = find_key_length(encoded_binary_string)
 print key_length
-# encoded_chunks = chunk_string_into_blocks(binary_for_string(encoded_string), key_length)
+encoded_chunks = chunk_string_into_blocks(encoded_binary_string, key_length)
 # # print encoded_chunks
-# transposed_chunks = encoded_transposed_chunks(encoded_chunks, key_length)
+transposed_chunks = encoded_transposed_chunks(encoded_chunks, key_length)
 # # print transposed_chunks
-# decoded_transposed_chunks = decode_transposed_chunks(transposed_chunks)
+decoded_transposed_chunks = decode_transposed_chunks(transposed_chunks)
 # #print decoded_transposed_chunks
-# print reconstruct_message_from_decoded_transposed_chunks(decoded_transposed_chunks)
+print reconstruct_message_from_decoded_transposed_chunks(decoded_transposed_chunks)
