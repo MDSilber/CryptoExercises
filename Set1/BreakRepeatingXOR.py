@@ -1,4 +1,4 @@
-import SingleByteXORCipher as XORCipher
+import Crypto
 import Base64
 
 def binary_for_string(string1):
@@ -43,7 +43,7 @@ def encoded_transposed_chunks(chunks, length):
 	return transposed_chunks
 
 def decode_transposed_chunks(chunks):
-	return [XORCipher.decode_single_character(chunk)[0] for chunk in chunks]
+	return [Crypto.brute_single_char_xor(chunk)[0] for chunk in chunks]
 
 def reconstruct_message_from_decoded_transposed_chunks(chunks):
 	message = ''

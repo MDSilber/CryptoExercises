@@ -16,4 +16,6 @@ def bytes_to_base_64(byte_string):
 def hex_to_bytes(hex_string):
 	return hex_string.encode()
 
-# print hex_to_base_64('49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d')
+def str_to_bytes(text):
+	decoded_text = text.decode("utf-8")
+	return decoded_text
